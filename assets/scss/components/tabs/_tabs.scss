@@ -12,31 +12,34 @@
 	&__item {
 		font-size: 18px;
 		text-align: center;
-		line-height: 45px;
+		line-height: 1;
 		margin-left: 6px;
 		margin-right: 6px;
-		border: 1px solid $main-dark-gray;
 		cursor: pointer;
-		background: $main-light-gray;
-		transition: border-color .255s ease,
-					background-color .225s ease;
 
-		&:hover {
-			border-color: $main-strong-gray;
-			background-color: $main-dark-gray;
+		> * {
+			pointer-events: none;
 		}
 
 		&--semicircle {
 			height: 50px;
 			width: 100px;
+			border: 1px solid $main-dark-gray;
+			border-bottom: 0 none;
 			border-top-left-radius: 100px;
 			border-top-right-radius: 100px;
-			border-bottom: 0 none;
+			background: $main-light-gray;
+			transition: border-color .255s ease,
+						background-color .225s ease;
+
+			&:hover,
+			&.active {
+				border-color: $main-strong-gray;
+				background-color: $main-dark-gray;
+			}
 		}
 
 		&--triangle {
-			background-color: transparent;
-			border: 0 none;
 			width: 100px;
 			position: relative;
 
@@ -55,16 +58,16 @@
 			}
 
 			&:after {
-				left: 2px;
-				top: 2px;
+				left: 1px;
+				top: 1px;
 				border-bottom-color: $main-light-gray;
-				border-left-width: 48px;
-				border-right-width: 48px;
-				border-bottom-width: 48px;
+				border-left-width: 49px;
+				border-right-width: 49px;
+				border-bottom-width: 49px;
 			}
 
-			&:hover {
-				background-color: transparent;
+			&:hover,
+			&.active {
 
 				&:before {
 					border-bottom-color: $main-strong-gray;
@@ -76,42 +79,136 @@
 		}
 
 		&--half-octagon {
-			width: 100px;
 			height: 50px;
+			overflow: hidden;
 			position: relative;
-			background-color: $main-light-gray;
-			border: 0 none;
 
-			&:before {
-				content: " ";
+			.octagon {
 				width: 100px;
-				height: 0;
-				position: absolute;
-				top: 0;
-				left: 0;
-				border-bottom: 29px solid $main-light-gray;
-				border-left: 29px solid $primary-bg-color;
-				border-right: 29px solid $primary-bg-color;
-				transition: border-color .255s ease;
-			}
+				height: 100px;
+				position: relative;
+				overflow: hidden;
 
-			&:hover {
-				background-color: $main-dark-gray;
+				&__inner {
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					overflow: hidden;
+					transform: rotate(45deg);
+					background-color: $main-light-gray;
+					border: 1px solid $main-dark-gray;
+					transition: background-color .225s ease,
+								border-color .225s ease;
 
-				&:before {
-					border-bottom-color: $main-dark-gray;
+					&:before {
+						content: " ";
+						position: absolute;
+						top: -1px;
+						right: -1px;
+						bottom: -1px;
+						left: -1px;
+						transform: rotate(45deg);
+						border: inherit;
+					}
 				}
 			}
 
+			&:hover,
+			&.active {
+				.octagon__inner {
+					background: $main-dark-gray;
+					border-color: $main-strong-gray;
+				}
+			}
+
+			.tabs__item-text {
+				position: absolute;
+				top: 0;
+				left: 50%;
+				line-height: 1;
+				transform: translateX(-50%);
+			}
 		}
 
 		&--pedestal {
+			width: 100px;
+			height: 50px;
+			border: 1px solid $main-dark-gray;
+			border-bottom: 0 none;
+			position: relative;
+			background-color: $main-light-gray;
+			transition: border-color .225s ease,
+						background-color .225s ease;
 
+			&:before,
+			&:after {
+				content: ' ';
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				left: -1px;
+				top: -1px;
+				background-color: $primary-bg-color;
+				border-bottom: 1px solid $main-dark-gray;
+				border-right: 1px solid $main-dark-gray;
+				transition: border-color .225s ease;
+			}
+
+			&:after {
+				left: auto;
+				right: -1px;
+				border-right: 0 none;
+				border-left: 1px solid $main-dark-gray;
+			}
+
+			&:hover,
+			&.active {
+				border-color: $main-strong-gray;
+				background-color: $main-dark-gray;
+
+				&:before,
+				&:after {
+					border-color: $main-strong-gray;
+				}
+			}
+		}
+	}
+
+	&__content-item {
+		display: none;
+
+		&.is-visible {
+			display: block;
 		}
 	}
 
 	&__item-text {
+		display: inline-block;
+		margin-top: 14px;
 		position: relative;
 		z-index: 2;
+	}
+
+	&__headline {
+		font-size: 35px;
+		margin: 25px 0 35px 0;
+	}
+
+	&__text {
+		font-size: 18px;
+		line-height: 1.3;
+	}
+
+	.highlight {
+		background-color: red;
+		animation: opacity .500s;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes opacity {
+		0%   { opacity: 0; }
+		100% { opacity: 1; }
 	}
 }
