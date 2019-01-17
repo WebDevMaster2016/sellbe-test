@@ -36,13 +36,13 @@ const autoprefixerSettings = {
 };
 
 //init local server
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', () => {
 	browserSync.init({
 		server: {
 			baseDir: "./dist"
 		}
 	});
-	browserSync.watch('dist', browserSync.reload)
+	browserSync.watch('dist/**/*.*').on('change', browserSync.reload);
 });
 
 // compile scss in to css, minify, autoprefixer, rename
