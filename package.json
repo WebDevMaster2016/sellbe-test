@@ -2,7 +2,7 @@
 	"name": "sellbe-test",
 	"version": "1.0.0",
 	"description": "test project",
-	"main": "dist/index.html",
+	"main": "index.html",
 	"scripts": {
 		"build": "gulp"
 	},
